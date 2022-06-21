@@ -1,12 +1,26 @@
 {
   "name": "tree-sitter-plymouth-script",
   "version": "0.1.0",
+  "description": "Plymouth script grammar for node-tree-sitter",
   "main": "bindings/node",
+  "keywords": ["parser", "lexer"],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/liushuyu/tree-sitter-plymouth-script/"
+  },
   "license": "MIT",
   "dependencies": {
     "nan": "^2.16.0"
   },
   "devDependencies": {
     "tree-sitter-cli": "^0.20.6"
-  }
+  },
+  "tree-sitter": [
+    {
+      "scope": "source.script",
+      "file-types": ["script"],
+      "highlights": ["queries/highlights-params.scm", "queries/highlights.scm"],
+      "content-regex": "(Plymouth\\.SetRefreshFunction|Window\\.SetBackgroundTopColor)"
+    }
+  ]
 }
