@@ -1,0 +1,406 @@
+============================================
+Real world example: Semaphore
+============================================
+
+# Set refresh rate (frame rate) to 30 fps.
+Plymouth.SetRefreshRate(30);
+
+# Set background color to black.
+Window.SetBackgroundTopColor(0, 0, 0);
+Window.SetBackgroundBottomColor(0, 0, 0);
+
+boot = [];
+poweroff = [];
+
+# Start from frame index 1 (startup-1.png, shutdown-1.png, ...).
+index = 1;
+
+fun load_sprites(stack, prefix, frames) {
+    for (i = 1; i <= frames; i++) {
+        stack[i].image = Image(prefix + i + ".png");
+        stack[i].sprite = Sprite(stack[i].image);
+        stack[i].sprite.SetOpacity(0);
+        stack[i].offset_y = 1;
+
+        # Center animation.
+        stack[i].x = Window.GetX() + Window.GetWidth() / 2 - stack[i].image.GetWidth() / 2;
+        stack[i].y = Window.GetX() + Window.GetHeight() * 0.625 - stack[i].image.GetHeight() / 2;
+        stack[i].sprite.SetPosition(stack[i].x, stack[i].y, 0);
+    }
+}
+
+fun draw_next_frame(stack) {
+    for (i = 1; i <= 35; i++) {
+        if (index != i) {
+            stack[i].sprite.SetOpacity(0);
+        }
+        else {
+            stack[i].sprite.SetOpacity(1);
+        }
+    }
+
+    # Draw the next frame.
+    # Repeat from frame 0 at frame 40: 5 empty frames until the next cycle.
+    index = (index + 1) % 40;
+}
+
+# Startup animation refresh loop.
+fun boot_callback() {
+    draw_next_frame(boot);
+}
+
+# Shutdown/reboot animation refresh loop.
+fun poweroff_callback() {
+    draw_next_frame(poweroff);
+}
+
+if (Plymouth.GetMode() == "boot") {
+    # Use startup loop.
+    load_sprites(boot, "startup-", 35);
+    Plymouth.SetRefreshFunction(boot_callback);
+} else if (Plymouth.GetMode() == "shutdown" || Plymouth.GetMode() == "reboot" ) {
+    # Use shutdown/reboot loop.
+    load_sprites(poweroff, "shutdown-", 35);
+    Plymouth.SetRefreshFunction(poweroff_callback);
+}
+
+---
+
+(program
+  (comment)
+  (expression_statement
+    (call_expression
+      function: (member_expression
+        object: (identifier)
+        property: (property_identifier))
+      arguments: (arguments
+        (number))))
+  (comment)
+  (expression_statement
+    (call_expression
+      function: (member_expression
+        object: (identifier)
+        property: (property_identifier))
+      arguments: (arguments
+        (number)
+        (number)
+        (number))))
+  (expression_statement
+    (call_expression
+      function: (member_expression
+        object: (identifier)
+        property: (property_identifier))
+      arguments: (arguments
+        (number)
+        (number)
+        (number))))
+  (expression_statement
+    (assignment_expression
+      left: (identifier)
+      right: (array)))
+  (expression_statement
+    (assignment_expression
+      left: (identifier)
+      right: (array)))
+  (comment)
+  (expression_statement
+    (assignment_expression
+      left: (identifier)
+      right: (number)))
+  (function_declaration
+    name: (identifier)
+    parameters: (formal_parameters
+      (identifier)
+      (identifier)
+      (identifier))
+    body: (statement_block
+      (for_statement
+        initializer: (expression_statement
+          (assignment_expression
+            left: (identifier)
+            right: (number)))
+        condition: (expression_statement
+          (binary_expression
+            left: (identifier)
+            right: (identifier)))
+        increment: (update_expression
+          argument: (identifier))
+        body: (statement_block
+          (expression_statement
+            (assignment_expression
+              left: (member_expression
+                object: (subscript_expression
+                  object: (identifier)
+                  index: (identifier))
+                property: (property_identifier))
+              right: (call_expression
+                function: (identifier)
+                arguments: (arguments
+                  (binary_expression
+                    left: (binary_expression
+                      left: (identifier)
+                      right: (identifier))
+                    right: (string
+                      (string_fragment)))))))
+          (expression_statement
+            (assignment_expression
+              left: (member_expression
+                object: (subscript_expression
+                  object: (identifier)
+                  index: (identifier))
+                property: (property_identifier))
+              right: (call_expression
+                function: (identifier)
+                arguments: (arguments
+                  (member_expression
+                    object: (subscript_expression
+                      object: (identifier)
+                      index: (identifier))
+                    property: (property_identifier))))))
+          (expression_statement
+            (call_expression
+              function: (member_expression
+                object: (member_expression
+                  object: (subscript_expression
+                    object: (identifier)
+                    index: (identifier))
+                  property: (property_identifier))
+                property: (property_identifier))
+              arguments: (arguments
+                (number))))
+          (expression_statement
+            (assignment_expression
+              left: (member_expression
+                object: (subscript_expression
+                  object: (identifier)
+                  index: (identifier))
+                property: (property_identifier))
+              right: (number)))
+          (comment)
+          (expression_statement
+            (assignment_expression
+              left: (member_expression
+                object: (subscript_expression
+                  object: (identifier)
+                  index: (identifier))
+                property: (property_identifier))
+              right: (binary_expression
+                left: (binary_expression
+                  left: (call_expression
+                    function: (member_expression
+                      object: (identifier)
+                      property: (property_identifier))
+                    arguments: (arguments))
+                  right: (binary_expression
+                    left: (call_expression
+                      function: (member_expression
+                        object: (identifier)
+                        property: (property_identifier))
+                      arguments: (arguments))
+                    right: (number)))
+                right: (binary_expression
+                  left: (call_expression
+                    function: (member_expression
+                      object: (member_expression
+                        object: (subscript_expression
+                          object: (identifier)
+                          index: (identifier))
+                        property: (property_identifier))
+                      property: (property_identifier))
+                    arguments: (arguments))
+                  right: (number)))))
+          (expression_statement
+            (assignment_expression
+              left: (member_expression
+                object: (subscript_expression
+                  object: (identifier)
+                  index: (identifier))
+                property: (property_identifier))
+              right: (binary_expression
+                left: (binary_expression
+                  left: (call_expression
+                    function: (member_expression
+                      object: (identifier)
+                      property: (property_identifier))
+                    arguments: (arguments))
+                  right: (binary_expression
+                    left: (call_expression
+                      function: (member_expression
+                        object: (identifier)
+                        property: (property_identifier))
+                      arguments: (arguments))
+                    right: (number)))
+                right: (binary_expression
+                  left: (call_expression
+                    function: (member_expression
+                      object: (member_expression
+                        object: (subscript_expression
+                          object: (identifier)
+                          index: (identifier))
+                        property: (property_identifier))
+                      property: (property_identifier))
+                    arguments: (arguments))
+                  right: (number)))))
+          (expression_statement
+            (call_expression
+              function: (member_expression
+                object: (member_expression
+                  object: (subscript_expression
+                    object: (identifier)
+                    index: (identifier))
+                  property: (property_identifier))
+                property: (property_identifier))
+              arguments: (arguments
+                (member_expression
+                  object: (subscript_expression
+                    object: (identifier)
+                    index: (identifier))
+                  property: (property_identifier))
+                (member_expression
+                  object: (subscript_expression
+                    object: (identifier)
+                    index: (identifier))
+                  property: (property_identifier))
+                (number))))))))
+  (function_declaration
+    name: (identifier)
+    parameters: (formal_parameters
+      (identifier))
+    body: (statement_block
+      (for_statement
+        initializer: (expression_statement
+          (assignment_expression
+            left: (identifier)
+            right: (number)))
+        condition: (expression_statement
+          (binary_expression
+            left: (identifier)
+            right: (number)))
+        increment: (update_expression
+          argument: (identifier))
+        body: (statement_block
+          (if_statement
+            condition: (parenthesized_expression
+              (binary_expression
+                left: (identifier)
+                right: (identifier)))
+            consequence: (statement_block
+              (expression_statement
+                (call_expression
+                  function: (member_expression
+                    object: (member_expression
+                      object: (subscript_expression
+                        object: (identifier)
+                        index: (identifier))
+                      property: (property_identifier))
+                    property: (property_identifier))
+                  arguments: (arguments
+                    (number)))))
+            alternative: (else_clause
+              (statement_block
+                (expression_statement
+                  (call_expression
+                    function: (member_expression
+                      object: (member_expression
+                        object: (subscript_expression
+                          object: (identifier)
+                          index: (identifier))
+                        property: (property_identifier))
+                      property: (property_identifier))
+                    arguments: (arguments
+                      (number)))))))))
+      (comment)
+      (comment)
+      (expression_statement
+        (assignment_expression
+          left: (identifier)
+          right: (binary_expression
+            left: (parenthesized_expression
+              (binary_expression
+                left: (identifier)
+                right: (number)))
+            right: (number))))))
+  (comment)
+  (function_declaration
+    name: (identifier)
+    parameters: (formal_parameters)
+    body: (statement_block
+      (expression_statement
+        (call_expression
+          function: (identifier)
+          arguments: (arguments
+            (identifier))))))
+  (comment)
+  (function_declaration
+    name: (identifier)
+    parameters: (formal_parameters)
+    body: (statement_block
+      (expression_statement
+        (call_expression
+          function: (identifier)
+          arguments: (arguments
+            (identifier))))))
+  (if_statement
+    condition: (parenthesized_expression
+      (binary_expression
+        left: (call_expression
+          function: (member_expression
+            object: (identifier)
+            property: (property_identifier))
+          arguments: (arguments))
+        right: (string
+          (string_fragment))))
+    consequence: (statement_block
+      (comment)
+      (expression_statement
+        (call_expression
+          function: (identifier)
+          arguments: (arguments
+            (identifier)
+            (string
+              (string_fragment))
+            (number))))
+      (expression_statement
+        (call_expression
+          function: (member_expression
+            object: (identifier)
+            property: (property_identifier))
+          arguments: (arguments
+            (identifier)))))
+    alternative: (else_clause
+      (if_statement
+        condition: (parenthesized_expression
+          (binary_expression
+            left: (binary_expression
+              left: (call_expression
+                function: (member_expression
+                  object: (identifier)
+                  property: (property_identifier))
+                arguments: (arguments))
+              right: (string
+                (string_fragment)))
+            right: (binary_expression
+              left: (call_expression
+                function: (member_expression
+                  object: (identifier)
+                  property: (property_identifier))
+                arguments: (arguments))
+              right: (string
+                (string_fragment)))))
+        consequence: (statement_block
+          (comment)
+          (expression_statement
+            (call_expression
+              function: (identifier)
+              arguments: (arguments
+                (identifier)
+                (string
+                  (string_fragment))
+                (number))))
+          (expression_statement
+            (call_expression
+              function: (member_expression
+                object: (identifier)
+                property: (property_identifier))
+              arguments: (arguments
+                (identifier)))))))))

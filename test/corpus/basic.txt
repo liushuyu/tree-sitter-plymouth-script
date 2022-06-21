@@ -1,0 +1,108 @@
+============================================
+Basic scripting
+============================================
+
+# comment
+
+variable = value; // another comment
+array_variable = [x,y]; /* C-style comment */
+map_variable = [x,y,[a,b]];
+number = 0.11;
+another_number = 114.514;
+index = 0;
+index++;
+index = index + 1;
+index += 2;
+
+/* multi-line comment
+ * can span multiple lines
+ */
+
+fun ab() {
+    a.c=b;
+}
+
+fun args(a,b,c) {}
+
+assign_from_function = fun () {};
+
+assign_from_function();
+
+---
+
+(program 
+  (comment )
+  (expression_statement 
+    (assignment_expression 
+      left: (identifier )
+      right: (identifier )))
+  (comment )
+  (expression_statement 
+    (assignment_expression 
+      left: (identifier )
+      right: (array 
+        (identifier )
+        (identifier ))))
+  (comment )
+  (expression_statement 
+    (assignment_expression 
+      left: (identifier )
+      right: (array 
+        (identifier )
+        (identifier )
+        (array 
+          (identifier )
+          (identifier )))))
+  (expression_statement 
+    (assignment_expression 
+      left: (identifier )
+      right: (number )))
+  (expression_statement 
+    (assignment_expression 
+      left: (identifier )
+      right: (number )))
+  (expression_statement 
+    (assignment_expression 
+      left: (identifier )
+      right: (number )))
+  (expression_statement 
+    (update_expression 
+      argument: (identifier )))
+  (expression_statement 
+    (assignment_expression 
+      left: (identifier )
+      right: (binary_expression 
+        left: (identifier )
+        right: (number ))))
+  (expression_statement 
+    (augmented_assignment_expression 
+      left: (identifier )
+      right: (number )))
+  (comment )
+  (function_declaration 
+    name: (identifier )
+    parameters: (formal_parameters )
+    body: (statement_block 
+      (expression_statement 
+        (assignment_expression 
+          left: (member_expression 
+            object: (identifier )
+            property: (property_identifier ))
+          right: (identifier )))))
+  (function_declaration 
+    name: (identifier )
+    parameters: (formal_parameters 
+      (identifier )
+      (identifier )
+      (identifier ))
+    body: (statement_block ))
+  (expression_statement 
+    (assignment_expression 
+      left: (identifier )
+      right: (function 
+        parameters: (formal_parameters )
+        body: (statement_block ))))
+  (expression_statement 
+    (call_expression 
+      function: (identifier )
+      arguments: (arguments ))))

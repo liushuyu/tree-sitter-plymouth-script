@@ -1,0 +1,171 @@
+============================================
+Real world example: PlymouthTheme-Cat
+============================================
+
+Window.SetBackgroundTopColor (0.08627450980392157, 0.08627450980392157, 0.08627450980392157);           # Nice blue on top of the screen fading to
+Window.SetBackgroundBottomColor (0.08627450980392157, 0.08627450980392157, 0.08627450980392157);  # an equally nice brown on the bottom
+
+for (i = 0; i < 111; i++)
+  flyingman_image[i] = Image("progress-" + i + ".png");
+flyingman_sprite = Sprite();
+
+
+flyingman_sprite.SetX(Window.GetWidth() / 2 - flyingman_image[0].GetWidth() / 2); # Place in the centre
+flyingman_sprite.SetY(Window.GetHeight() / 2 - flyingman_image[0].GetHeight() / 2);
+
+progress = 0;
+
+fun refresh_callback ()
+  {
+    flyingman_sprite.SetImage(flyingman_image[Math.Int(progress / 3) % 111]);
+    progress++;
+  }
+  
+Plymouth.SetRefreshFunction (refresh_callback);
+
+
+#sudo update-alternatives --install /lib/plymouth/themes/default.plymouth default.plymouth /lib/plymouth/themes/mytheme/mytheme.plymouth 100
+#sudo update-alternatives --config default.plymouth
+#sudo update-initramfs -u
+
+---
+
+(program
+  (expression_statement
+    (call_expression
+      function: (member_expression
+        object: (identifier)
+        property: (property_identifier))
+      arguments: (arguments
+        (number)
+        (number)
+        (number))))
+  (comment)
+  (expression_statement
+    (call_expression
+      function: (member_expression
+        object: (identifier)
+        property: (property_identifier))
+      arguments: (arguments
+        (number)
+        (number)
+        (number))))
+  (comment)
+  (for_statement
+    initializer: (expression_statement
+      (assignment_expression
+        left: (identifier)
+        right: (number)))
+    condition: (expression_statement
+      (binary_expression
+        left: (identifier)
+        right: (number)))
+    increment: (update_expression
+      argument: (identifier))
+    body: (expression_statement
+      (assignment_expression
+        left: (subscript_expression
+          object: (identifier)
+          index: (identifier))
+        right: (call_expression
+          function: (identifier)
+          arguments: (arguments
+            (binary_expression
+              left: (binary_expression
+                left: (string
+                  (string_fragment))
+                right: (identifier))
+              right: (string
+                (string_fragment))))))))
+  (expression_statement
+    (assignment_expression
+      left: (identifier)
+      right: (call_expression
+        function: (identifier)
+        arguments: (arguments))))
+  (expression_statement
+    (call_expression
+      function: (member_expression
+        object: (identifier)
+        property: (property_identifier))
+      arguments: (arguments
+        (binary_expression
+          left: (binary_expression
+            left: (call_expression
+              function: (member_expression
+                object: (identifier)
+                property: (property_identifier))
+              arguments: (arguments))
+            right: (number))
+          right: (binary_expression
+            left: (call_expression
+              function: (member_expression
+                object: (subscript_expression
+                  object: (identifier)
+                  index: (number))
+                property: (property_identifier))
+              arguments: (arguments))
+            right: (number))))))
+  (comment)
+  (expression_statement
+    (call_expression
+      function: (member_expression
+        object: (identifier)
+        property: (property_identifier))
+      arguments: (arguments
+        (binary_expression
+          left: (binary_expression
+            left: (call_expression
+              function: (member_expression
+                object: (identifier)
+                property: (property_identifier))
+              arguments: (arguments))
+            right: (number))
+          right: (binary_expression
+            left: (call_expression
+              function: (member_expression
+                object: (subscript_expression
+                  object: (identifier)
+                  index: (number))
+                property: (property_identifier))
+              arguments: (arguments))
+            right: (number))))))
+  (expression_statement
+    (assignment_expression
+      left: (identifier)
+      right: (number)))
+  (function_declaration
+    name: (identifier)
+    parameters: (formal_parameters)
+    body: (statement_block
+      (expression_statement
+        (call_expression
+          function: (member_expression
+            object: (identifier)
+            property: (property_identifier))
+          arguments: (arguments
+            (subscript_expression
+              object: (identifier)
+              index: (binary_expression
+                left: (call_expression
+                  function: (member_expression
+                    object: (identifier)
+                    property: (property_identifier))
+                  arguments: (arguments
+                    (binary_expression
+                      left: (identifier)
+                      right: (number))))
+                right: (number))))))
+      (expression_statement
+        (update_expression
+          argument: (identifier)))))
+  (expression_statement
+    (call_expression
+      function: (member_expression
+        object: (identifier)
+        property: (property_identifier))
+      arguments: (arguments
+        (identifier))))
+  (comment)
+  (comment)
+  (comment))
