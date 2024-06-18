@@ -2331,7 +2331,6 @@
   "externals": [],
   "inline": [
     "_call_signature",
-    "ReferenceError",
     "statement",
     "_lhs_expression"
   ],
@@ -2343,4 +2342,3 @@
     "pattern"
   ]
 }
-
